@@ -1,78 +1,127 @@
 @import "tailwindcss";
 
-/* Custom components based on existing styles */
+/* Anthropic-inspired design components */
 @layer components {
-  .btn {
-    @apply inline-block text-xs bg-gray-300 border border-gray-600 no-underline transition-all duration-200 ease-out cursor-pointer;
-    padding: 0.5rem 0.75rem;
+  /* Primary button - for main actions */
+  .btn-primary {
+    @apply px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg border border-gray-900 transition-all duration-200 ease-out cursor-pointer;
   }
   
-  .btn:hover {
-    @apply bg-gray-400 -translate-y-0.5 shadow-sm;
+  .btn-primary:hover {
+    @apply shadow-lg transform -translate-y-0.5;
   }
   
-  .btn:active {
-    @apply translate-y-0 shadow-none;
+  .btn-primary:active {
+    @apply transform translate-y-0 shadow-md;
   }
   
-  .btn:disabled {
+  .btn-primary:disabled {
     @apply opacity-60 cursor-not-allowed transform-none;
   }
   
-  .task-row {
-    @apply transition-all duration-300 ease-out;
+  /* Secondary button - for secondary actions */
+  .btn-secondary {
+    @apply px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg border border-gray-300 transition-all duration-200 ease-out cursor-pointer;
   }
   
-  .task-row.highlight {
-    @apply bg-blue-50 scale-105;
+  .btn-secondary:hover {
+    @apply shadow-sm border-gray-400;
   }
   
+  .btn-secondary:active {
+    @apply bg-gray-100;
+  }
+  
+  .btn-secondary:disabled {
+    @apply opacity-60 cursor-not-allowed;
+  }
+  
+  /* Task form styling */
   .task-form {
-    @apply mb-5 p-4 bg-gray-50 rounded border border-gray-200;
+    @apply bg-white p-8 rounded-xl border border-gray-200 shadow-sm;
   }
   
   .task-input {
-    @apply p-2 border border-gray-300 rounded transition-colors duration-200 ease-out;
+    @apply px-4 py-3 text-base border border-gray-300 rounded-lg transition-all duration-200 ease-out bg-white;
   }
   
   .task-input:focus {
-    @apply border-blue-500 outline-none ring-2 ring-blue-200;
+    @apply border-gray-900 outline-none ring-4 ring-gray-100;
   }
   
+  .task-input::placeholder {
+    @apply text-gray-500;
+  }
+  
+  /* Task row styling */
+  .task-row {
+    @apply transition-all duration-300 ease-out hover:bg-gray-50;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  
+  .task-row td {
+    @apply px-4 py-4 text-sm;
+  }
+  
+  .task-row.highlight {
+    @apply bg-blue-50 scale-[1.02] shadow-sm;
+  }
+  
+  /* Alert styling */
   .alert-error {
-    @apply bg-red-100 text-red-800 p-2.5 border border-red-200 rounded mb-4;
+    @apply bg-red-50 text-red-900 p-4 border border-red-200 rounded-lg mb-6;
   }
   
   .alert-success {
-    @apply bg-green-100 text-green-800 p-2.5 border border-green-200 rounded mb-4;
+    @apply bg-green-50 text-green-900 p-4 border border-green-200 rounded-lg mb-6;
   }
   
-  /* Task state styles */
+  /* Task state styles - more refined */
   .doing .subject {
-    @apply font-bold;
+    @apply font-semibold text-blue-900 bg-blue-50 px-2 py-1 rounded;
   }
   
   .done .subject {
-    @apply line-through;
+    @apply line-through text-gray-500 opacity-75;
   }
   
   .canceled .subject {
-    @apply line-through text-gray-600;
+    @apply line-through text-gray-400 opacity-60;
   }
   
   .review {
-    @apply bg-yellow-200;
+    @apply bg-amber-50 border-l-4 border-amber-400;
   }
   
+  /* List separators */
   .completely_closed_mark td {
-    @apply border-t-2 border-black;
+    @apply border-t-4 border-gray-900 bg-gray-50;
   }
   
   .closed_mark td {
-    @apply border-t-2 border-red-500;
+    @apply border-t-2 border-orange-400 bg-orange-50;
   }
   
+  /* Button variations for task actions */
+  .btn-start {
+    @apply px-3 py-1 text-xs font-medium rounded border bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 transition-colors duration-150;
+  }
+  
+  .btn-complete {
+    @apply px-3 py-1 text-xs font-medium rounded border bg-green-50 text-green-700 border-green-200 hover:bg-green-100 transition-colors duration-150;
+  }
+  
+  .btn-cancel {
+    @apply px-3 py-1 text-xs font-medium rounded border bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100 transition-colors duration-150;
+  }
+  
+  /* Typography refinements */
   .subject p {
-    @apply inline;
+    @apply inline text-gray-900;
+  }
+  
+  /* Empty state styling */
+  .empty-state {
+    @apply text-center py-16 px-6 bg-white rounded-lg border border-gray-200;
   }
 }

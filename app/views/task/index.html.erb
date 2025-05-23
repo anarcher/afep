@@ -1,5 +1,4 @@
-<div class="p-6">
-
+<!-- Flash Messages -->
 <div id="flash_messages">
 <% if flash[:error] %>
 <div class="alert-error">
@@ -8,29 +7,57 @@
 <% end %>
 </div>
 
-<div id="new_task_form" class="task-form">
-  <%= form_with url: "/task/add", local: false, data: { controller: "form-reset" } do |form| %>
-    <%= form.label :subject, "New Task:", class: "block mb-2 font-medium" %>
-    <%= form.text_field :subject, size: 100, maxlength: 255, data: { "form-reset-target": "input" }, autofocus: true, class: "task-input w-full mb-2" %>
-    <%= form.submit "Add", data: { disable_with: "Adding..." }, class: "btn" %>
+<!-- New Task Section -->
+<section class="mb-12">
+  <div id="new_task_form" class="task-form">
+    <%= form_with url: "/task/add", local: false, data: { controller: "form-reset" } do |form| %>
+      <%= form.label :subject, "Add a new task", class: "block text-lg font-semibold text-gray-900 mb-4" %>
+      <div class="flex gap-3">
+        <%= form.text_field :subject, 
+            maxlength: 255, 
+            data: { "form-reset-target": "input" }, 
+            autofocus: true, 
+            placeholder: "What needs to be done?",
+            class: "task-input flex-1 min-w-0" %>
+        <%= form.submit "Add task", data: { disable_with: "Adding..." }, class: "btn-primary shrink-0" %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<!-- Actions -->
+<section class="mb-8">
+  <%= button_to "Close current list", "/task/close_list", 
+      method: :post, 
+      class: "btn-secondary", 
+      local: false, 
+      data: { disable_with: "Closing..." } %>
+</section>
+
+<!-- Task List -->
+<section>
+  <h2 class="text-xl font-semibold text-gray-900 mb-6">Your tasks</h2>
+  
+  <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+    <table id="task_list" class="w-full">
+      <colgroup>
+        <col width="100" />
+        <col width="100" />
+        <col width="100" />
+        <col width="*" />
+      </colgroup>
+      <tbody id="task_list_body">
+      <% @working_list.tasks.each do |task| %>
+        <%= render partial: "task_row", locals: { task: task } %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <% if @working_list.tasks.empty? %>
+    <div class="text-center py-12 text-gray-500">
+      <p class="text-lg">No tasks yet</p>
+      <p class="text-sm mt-1">Add your first task above to get started</p>
+    </div>
   <% end %>
-</div>
-
-<%= button_to "Close list", "/task/close_list", method: :post, class: "btn mb-6", 
-    local: false, data: { disable_with: "Closing..." } %>
-
-<table id="task_list" class="w-full border-spacing-0 mx-1">
-  <colgroup>
-    <col width="100" />
-    <col width="100" />
-    <col width="100" />
-    <col width="*" />
-  </colgroup>
-  <tbody id="task_list_body">
-  <% @working_list.tasks.each do |task| %>
-    <%= render partial: "task_row", locals: { task: task } %>
-  <% end %>
-  </tbody>
-</table>
-
-</div>
+</section>

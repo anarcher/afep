@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Autofocus</title>
+  <title>AFEP - Autofocus Task Management</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -9,13 +9,26 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
-<body data-controller="turbo-stream-actions keyboard-shortcuts" class="font-sans text-xs">
-  <div class="p-6">
-    <h1 class="text-lg font-bold mb-2">AFEP</h1>
-    <small class="text-gray-600">Press 'n' to focus on new task input, Cmd/Ctrl+Enter to submit</small>
-  </div>
-  
-  <%= yield %> 
+<body data-controller="turbo-stream-actions keyboard-shortcuts" class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200">
+    <div class="max-w-4xl mx-auto px-6 py-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900">AFEP</h1>
+          <p class="text-gray-600 mt-1">Autofocus task management</p>
+        </div>
+        <div class="text-sm text-gray-500">
+          Press 'n' to add task • Cmd/Ctrl+Enter to submit
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <%= yield %>
+  </main>
   
 </body>
 </html>
