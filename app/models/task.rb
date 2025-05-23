@@ -36,6 +36,6 @@ class Task < ActiveRecord::Base
     not started? and completed?
   end
   def self.find_uncompleted_before(closed_mark)
-    Task.find(:first, :conditions=>["id <= ? and completed_at is null", closed_mark.task_id], :order=>"id", :limit=>1)
+    Task.where("id <= ? and completed_at is null", closed_mark.task_id).order("id").limit(1).first
   end
 end

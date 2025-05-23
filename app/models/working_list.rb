@@ -2,9 +2,9 @@ class WorkingList
   def initialize
     @marks = ClosedMark.recent(3)
     if @marks.size == 3
-      @tasks = Task.find(:all, :conditions=>["id > ?", @marks[-1].task_id], :order=>"id DESC")
+      @tasks = Task.where("id > ?", @marks[-1].task_id).order("id DESC")
     else
-      @tasks = Task.find(:all, :order=>"id DESC")
+      @tasks = Task.order("id DESC")
     end
   end
   def tasks

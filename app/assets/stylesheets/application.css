@@ -1,0 +1,46 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body, table {
+  font-family: "Helvetica", "Arial", "NanumGothic", "NanumGothicOTF", sans-serif;
+  font-size: 10pt; }
+
+a.button, input[type="submit"].button {
+  padding: 1px 4px 1px 4px;
+  background-color: lightgray;
+  border: 1px solid darkgray;
+  text-decoration: none;
+  font-size: 10pt;
+  font-family: "Helvetica", "Arial", "NanumGothic", "NanumGothicOTF", sans-serif; }
+
+#task_list {
+  margin: 2px;
+  width: 100%;
+  border-spacing: 0; }
+  #task_list span.date {
+    font-family: monospace;
+    font-size: small; }
+  #task_list tr td {
+    border-bottom: 1px solid lightgray;
+    padding: 4px;
+    list-style-type: none; }
+  #task_list tr td.subject > p {
+    display: inline; }
+  #task_list tr.doing td.subject {
+    font-weight: bold; }
+  #task_list tr.done td.subject {
+    text-decoration: line-through; }
+  #task_list tr.canceled td.subject {
+    text-decoration: line-through;
+    color: darkgray; }
+  #task_list tr.review {
+    background-color: #ffff66; }
+  #task_list tr.completely_closed_mark td {
+    border-top: 2px solid black; }
+  #task_list tr.closed_mark td {
+    border-top: 2px solid red; }

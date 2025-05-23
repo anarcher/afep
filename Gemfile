@@ -1,17 +1,30 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '~> 8.0.0'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'sqlite3', '~> 2.0'
+gem 'haml-rails', '~> 2.0'
+gem 'puma', '~> 6.0'
+gem 'bootsnap', require: false
+gem 'sprockets-rails'
+gem 'importmap-rails'
+gem 'turbo-rails'
+gem 'stimulus-rails'
+gem 'jbuilder'
+gem 'redis', '>= 4.0.1'
+gem 'image_processing', '~> 1.2'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'haml', '>= 3.0.0'
-
-group :test, :development do
-  gem "rspec-rails", ">= 2.0.0.beta.22"
+group :development, :test do
+  gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
+  gem 'brakeman', require: false
+  gem 'rubocop-rails-omakase', require: false
+  gem 'rspec-rails', '~> 7.0'
 end
-gem "autotest"
+
+group :development do
+  gem 'web-console'
+end
+
 
 # Use unicorn as the web server
 # gem 'unicorn'

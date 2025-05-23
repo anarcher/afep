@@ -1,0 +1,56 @@
+<div>
+
+<% if flash[:error] %>
+<div class="error">
+    <%= flash[:error] %>
+</div>
+<% end %>
+
+<%= form_with url: "/task/add", local: true do |form| %>
+  <%= form.label :subject, "New Task:" %>
+  <%= form.text_field :subject, size: 100, maxlength: 255 %>
+  <%= form.submit "Add" %>
+<% end %>
+
+<%= button_to "Close list", "/task/close_list", method: :post, class: "button close_list" %>
+
+<table id="task_list">
+  <colgroup>
+    <col width="100" />
+    <col width="100" />
+    <col width="100" />
+    <col width="*" />
+  </colgroup>
+  <tbody>
+  <% @working_list.tasks.each do |each| %>
+  <tr id="task_<%= each.id %>" class="<%= item_class_of_task(each) %>">
+    <td>
+      <span class="date"><%= each.created_at.strftime("%d %a %H:%M") %></span>
+    </td>
+    <td>
+      <% if each.started? %>
+      <span class="date"><%= each.started_at.strftime("%d %a %H:%M") %></span>
+      <% elsif not each.started? and not each.canceled? %>
+      <%= button_to "Start", "/task/start/#{each.id}", method: :post, class: "button start" %>
+      <% else %>
+      -
+      <% end %>
+    </td>
+    <td>
+      <% if each.completed? %>
+      <span class="date"><%= each.completed_at.strftime("%d %a %H:%M") if each.completed? %></span>
+      <% elsif not each.started? %>
+      <%= button_to "Cancel", "/task/cancel/#{each.id}", method: :post, class: "button cancel" %>
+      <% else %>
+      <%= button_to "Complete", "/task/complete/#{each.id}", method: :post, class: "button complete" %>
+      <% end %>
+    </td>
+    <td class="subject">
+      <%= htmlize_subject(each.subject) %>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+</div>

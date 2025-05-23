@@ -1,26 +1,47 @@
-Autofocus::Application.configure do
-  # Settings specified here will take precedence over those in config/environment.rb
+Rails.application.configure do
+  config.enable_reloading = true
 
-  # In the development environment your application's code is reloaded on
-  # every request.  This slows down response time but is perfect for development
-  # since you don't have to restart the webserver when you make code changes.
-  config.cache_classes = false
+  config.eager_load = false
 
-  # Log error messages when you accidentally call methods on nil.
-  config.whiny_nils = true
+  config.consider_all_requests_local = true
 
-  # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
-  config.action_view.debug_rjs             = true
-  config.action_controller.perform_caching = false
+  config.server_timing = true
 
-  # Don't care if the mailer can't send
+  if Rails.root.join("tmp/caching-dev.txt").exist?
+    config.action_controller.perform_caching = true
+    config.action_controller.enable_fragment_cache_logging = true
+
+    config.cache_store = :memory_store
+    config.public_file_server.headers = { "Cache-Control" => "public, max-age=#{2.days.to_i}" }
+  else
+    config.action_controller.perform_caching = false
+
+    config.cache_store = :null_store
+  end
+
+  config.active_storage.variant_processor = :mini_magick
+
   config.action_mailer.raise_delivery_errors = false
 
-  # Print deprecation notices to the Rails logger
+  config.action_mailer.perform_caching = false
+
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
   config.active_support.deprecation = :log
 
-  # Only use best-standards-support built into browsers
-  config.action_dispatch.best_standards_support = :builtin
+  config.active_support.disallowed_deprecation = :raise
+
+  config.active_support.disallowed_deprecation_warnings = []
+
+  config.active_record.migration_error = :page_load
+
+  config.active_record.verbose_query_logs = true
+
+  config.active_job.verbose_enqueue_logs = true
+
+  config.assets.quiet = false
+  config.assets.debug = true
+
+  config.web_console.permissions = "127.0.0.1"
 end
 

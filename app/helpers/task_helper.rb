@@ -30,6 +30,7 @@ module TaskHelper
     ([class_for_task_state(task), class_for_closed_mark(task), class_for_review(task)].reject { |e| e == "" }).join " "
   end
   def htmlize_subject(subject)
-    auto_link(h(subject))
+    # Rails 8에서는 auto_link가 제거되어서 간단히 HTML escape만 적용
+    html_escape(subject)
   end
 end

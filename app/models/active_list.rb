@@ -1,9 +1,9 @@
 class ActiveList
   def add(subject)
-    Task.create!(:subject=>subject, :created_at=>Time.now)
+    Task.create!(subject: subject, created_at: Time.now)
   end
   def close
-    last_task = Task.find(:first, :order=>"id DESC", :limit=>1)
-    ClosedMark.create!(:task_id=>last_task.id)
+    last_task = Task.order("id DESC").limit(1).first
+    ClosedMark.create!(task_id: last_task.id)
   end
 end
