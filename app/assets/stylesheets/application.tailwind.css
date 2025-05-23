@@ -1,11 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Custom components based on existing styles */
 @layer components {
   .btn {
-    @apply inline-block px-2 py-1 text-xs bg-gray-300 border border-gray-600 no-underline transition-all duration-200 ease-out cursor-pointer;
+    @apply inline-block text-xs bg-gray-300 border border-gray-600 no-underline transition-all duration-200 ease-out cursor-pointer;
+    padding: 0.5rem 0.75rem;
   }
   
   .btn:hover {
