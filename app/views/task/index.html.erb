@@ -2,24 +2,24 @@
 
 <div id="flash_messages">
 <% if flash[:error] %>
-<div class="error">
+<div class="alert-error">
     <%= flash[:error] %>
 </div>
 <% end %>
 </div>
 
-<div id="new_task_form">
+<div id="new_task_form" class="task-form">
   <%= form_with url: "/task/add", local: false, data: { controller: "form-reset" } do |form| %>
-    <%= form.label :subject, "New Task:" %>
-    <%= form.text_field :subject, size: 100, maxlength: 255, data: { "form-reset-target": "input" }, autofocus: true %>
-    <%= form.submit "Add", data: { disable_with: "Adding..." } %>
+    <%= form.label :subject, "New Task:", class: "block mb-2 font-medium" %>
+    <%= form.text_field :subject, size: 100, maxlength: 255, data: { "form-reset-target": "input" }, autofocus: true, class: "task-input w-full mb-2" %>
+    <%= form.submit "Add", data: { disable_with: "Adding..." }, class: "btn" %>
   <% end %>
 </div>
 
-<%= button_to "Close list", "/task/close_list", method: :post, class: "button close_list", 
+<%= button_to "Close list", "/task/close_list", method: :post, class: "btn mb-4", 
     local: false, data: { disable_with: "Closing..." } %>
 
-<table id="task_list">
+<table id="task_list" class="w-full border-spacing-0 mx-1">
   <colgroup>
     <col width="100" />
     <col width="100" />

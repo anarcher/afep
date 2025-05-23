@@ -1,29 +1,29 @@
-<tr id="task_<%= task.id %>" class="<%= item_class_of_task(task) %>" data-controller="task-row">
-  <td>
-    <span class="date"><%= task.created_at.strftime("%d %a %H:%M") %></span>
+<tr id="task_<%= task.id %>" class="task-row <%= item_class_of_task(task) %>" data-controller="task-row">
+  <td class="border-b border-gray-300 p-1">
+    <span class="font-mono text-sm"><%= task.created_at.strftime("%d %a %H:%M") %></span>
   </td>
-  <td>
+  <td class="border-b border-gray-300 p-1">
     <% if task.started? %>
-    <span class="date"><%= task.started_at.strftime("%d %a %H:%M") %></span>
+    <span class="font-mono text-sm"><%= task.started_at.strftime("%d %a %H:%M") %></span>
     <% elsif not task.started? and not task.canceled? %>
-    <%= button_to "Start", "/task/start/#{task.id}", method: :post, class: "button start", 
+    <%= button_to "Start", "/task/start/#{task.id}", method: :post, class: "btn", 
         local: false, data: { disable_with: "Starting..." } %>
     <% else %>
     -
     <% end %>
   </td>
-  <td>
+  <td class="border-b border-gray-300 p-1">
     <% if task.completed? %>
-    <span class="date"><%= task.completed_at.strftime("%d %a %H:%M") if task.completed? %></span>
+    <span class="font-mono text-sm"><%= task.completed_at.strftime("%d %a %H:%M") if task.completed? %></span>
     <% elsif not task.started? %>
-    <%= button_to "Cancel", "/task/cancel/#{task.id}", method: :post, class: "button cancel",
+    <%= button_to "Cancel", "/task/cancel/#{task.id}", method: :post, class: "btn",
         local: false, data: { disable_with: "Canceling..." } %>
     <% else %>
-    <%= button_to "Complete", "/task/complete/#{task.id}", method: :post, class: "button complete",
+    <%= button_to "Complete", "/task/complete/#{task.id}", method: :post, class: "btn",
         local: false, data: { disable_with: "Completing..." } %>
     <% end %>
   </td>
-  <td class="subject">
+  <td class="border-b border-gray-300 p-1 subject">
     <%= htmlize_subject(task.subject) %>
   </td>
 </tr>
