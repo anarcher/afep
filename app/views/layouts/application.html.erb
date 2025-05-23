@@ -9,9 +9,10 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
-<body>
+<body data-controller="turbo-stream-actions keyboard-shortcuts">
   <div>
     <h1>AFEP</h1>
+    <small style="color: #666;">Press 'n' to focus on new task input, Cmd/Ctrl+Enter to submit</small>
   </div>
   
   <%= yield %> 

@@ -1,0 +1,19 @@
+<% if flash[:error] %>
+  <%= turbo_stream.update "flash_messages" do %>
+    <div class="error">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+<% else %>
+  <%= turbo_stream.update "task_list_body" do %>
+    <% @working_list.tasks.each do |task| %>
+      <%= render partial: "task_row", locals: { task: task } %>
+    <% end %>
+  <% end %>
+  
+  <%= turbo_stream.update "flash_messages" do %>
+    <div class="success">
+      작업 목록이 성공적으로 닫혔습니다.
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,13 @@
+<%= turbo_stream.prepend "task_list_body" do %>
+  <%= render partial: "task_row", locals: { task: @task } %>
+<% end %>
+
+<%= turbo_stream.action "highlight", "task_#{@task.id}" %>
+
+<%= turbo_stream.update "new_task_form" do %>
+  <%= form_with url: "/task/add", local: false, data: { controller: "form-reset" } do |form| %>
+    <%= form.label :subject, "New Task:" %>
+    <%= form.text_field :subject, size: 100, maxlength: 255, data: { "form-reset-target": "input" } %>
+    <%= form.submit "Add", data: { disable_with: "Adding..." } %>
+  <% end %>
+<% end %>
